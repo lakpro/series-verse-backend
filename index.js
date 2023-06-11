@@ -2,10 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const db = require("./database/mongo");
-// require("dotenv").config();
-
+const series = require("./dbModels/series");
+const seriesRouter = require("./routes/seriesRouter");
 const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 app.use(cors());
@@ -23,8 +22,8 @@ db.on("connected", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/api/series", seriesRouter);
 
 // Till now, we have built the basic connection with the database
+
+module.exports = app;
