@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const db = require("./database/mongo");
 const series = require("./dbModels/series");
 const seriesRouter = require("./routes/seriesRouter");
+const idRouter = require("./routes/idRouter");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -23,7 +24,6 @@ db.on("connected", () => {
 });
 
 app.use("/api/series", seriesRouter);
-
-// Till now, we have built the basic connection with the database
+app.use("/api/id", idRouter);
 
 module.exports = app;
