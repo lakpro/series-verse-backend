@@ -6,6 +6,7 @@ const idRouter = require("./routes/idRouter");
 const searchRouter = require("./routes/searchRouter");
 const authRouter = require("./routes/authRouter");
 const indexRouter = require("./routes/indexRouter");
+const favouritesRouter = require("./routes/favouritesRouter");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require("passport");
@@ -23,8 +24,11 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
+    saveUninitialized: false,
+    // cookie: {
+    //   secure: false,
+    //   // maxAge: 1000 * 10, // 60 seconds
+    // },
   })
 );
 
@@ -42,6 +46,7 @@ app.use("/api/series", seriesRouter);
 app.use("/api/id", idRouter);
 app.use("/api/search", searchRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/favourite", favouritesRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

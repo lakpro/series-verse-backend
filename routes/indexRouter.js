@@ -10,6 +10,7 @@ router.route("/").get(ensureGuest, (req, res) => {
 router.route("/dashboard").get(ensureAuth, (req, res) => {
   // res.render("dashboard");
   res.send("Dashboard");
+  //   console.log(req.user);
 });
 
 module.exports = router;

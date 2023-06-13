@@ -20,21 +20,13 @@ router.get("/logout", (req, res) => {
     if (err) {
       console.log(err);
     } else {
+      // req.session.destroy(() => res.redirect("/"));
       console.log("Logged out");
       res.redirect("/");
     }
   });
 });
 
-// router.get("/loguot", (req, res) => {
-//   req.logout((err) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("Logged out");
-//       res.redirect("/");
-//     }
-//   });
-// });
+
 
 module.exports = router;
