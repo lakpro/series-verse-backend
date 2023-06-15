@@ -14,6 +14,7 @@ module.exports = function (passport) {
         console.log(profile);
         const newUser = {
           googleId: profile.id,
+          email: profile.emails[0].value,
           displayName: profile.displayName,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
@@ -35,6 +36,7 @@ module.exports = function (passport) {
             cb(null, user);
           } else {
             user = await User.create(newUser);
+
             cb(null, user);
           }
         } catch (err) {

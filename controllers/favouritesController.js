@@ -75,3 +75,19 @@ exports.removeFavourites = async (req, res) => {
     res.status(500).json({ file: "fav remove controller", error: err.message });
   }
 };
+
+exports.getFavourites = async (req, res) => {
+  try {
+    let user = await Favourites.findOne({ googleId: req.params["gid"] });
+    if (!user) {
+      res.send("User does not exist");
+    } else {
+      console.log(user);
+      let FavouritesList = user.FavouritesList;
+      //   let user;
+      res.send(FavouritesList);
+    }
+  } catch (err) {
+    res.status(500).json({ file: "fav get controller", error: err.message });
+  }
+};

@@ -12,4 +12,10 @@ module.exports = {
       return next();
     }
   },
+  isAuth: function (req, res, next) {
+    if (req.isAuthenticated()) {
+      return true;
+    }
+    return false;
+  },
 };

@@ -1,0 +1,12 @@
+/
+/dashboard -> If user is logged in, it will have user details else will redirect to /
+api/auth/google
+api/auth/google/callback
+api/auth/logout
+api/auth/check  -> Tells if user is logged in or not (true/false)
+api/series
+api/id/:id
+api/search/:query
+api/favourite/set/:gid/:id
+api/favourite/remove/:gid/:id
+api/favourite/get/:gid
