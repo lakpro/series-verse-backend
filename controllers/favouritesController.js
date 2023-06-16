@@ -34,10 +34,14 @@ exports.setFavourites = async (req, res, next) => {
         res.status(201);
       }
     } catch (err) {
+      return null;
+
       res.status(500).json({ file: "fav user controller", error: err.message });
     }
     // console.log(user);
   } catch (err) {
+    return null;
+
     res.status(500).json({ file: "fav set controller", error: err.message });
   }
 };
@@ -71,9 +75,12 @@ exports.removeFavourites = async (req, res) => {
         }
       }
     } catch (err) {
+      return null;
       res.status(500).json({ file: "fav remove user", error: err.message });
     }
   } catch (err) {
+    return null;
+
     res.status(500).json({ file: "fav remove controller", error: err.message });
   }
 };
@@ -90,6 +97,8 @@ exports.getFavourites = async (req, res) => {
       res.send(FavouritesList);
     }
   } catch (err) {
+    return null;
+
     res.status(500).json({ file: "fav get controller", error: err.message });
   }
 };
