@@ -23,24 +23,32 @@ router.get(
 );
 
 router.get("/logout", (req, res) => {
-  req.logout(function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      // req.session.destroy(() => res.redirect("/"));
-      console.log("Logged out");
-      res.redirect("/");
-    }
-  });
+  // req.logout(function (err) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     req.session.destroy(() => res.redirect("http://localhost:3000/home"));
+  //     // console.log("Logged out");
+  //     // res.redirect(process.env.REACT_APP_FRONTEND_URL + "/home");
+  //     // res.writeHead(302, {
+  //     // Location: "http://localhost:3000/home",
+  //     // Location: process.env.FRONRTEND_URI + "/home",
+  //     // });
+  //     // return res.redirect("/dashboard");
+  //   }
+  // });
+  req.app.set("user", null);
+  req.session.destroy();
+  res.redirect("http://localhost:3000/home");
 });
 
 router.get("/check", (req, res) => {
   if (req.isAuthenticated()) {
     // let str = CircularJSON.stringify(req.user);
     // str = JSON.parse(str);
-    res.send(true);
+    res.send({ check: true });
   } else {
-    res.send(false);
+    res.send({ check: false });
   }
 });
 

@@ -8,11 +8,11 @@ const {
 const { ensureAuth, ensureGuest } = require("../controllers/authController");
 
 // call http://localhost:3001/api/favourite/set/123/1399 (123 is googleId and 1399 is the id of series to be added)
-router.route("/set/:gid/:id").get(ensureAuth, setFavourites);
+router.route("/set/:gid/:id").get(setFavourites);
 
 // call http://localhost:3001/api/favourite/remove/123/1399 (123 is googleId and 1399 is the id of series to be removed)
-router.route("/remove/:gid/:id").get(ensureAuth, removeFavourites);
+router.route("/remove/:gid/:id").get(removeFavourites);
 
-router.route("/get/:gid").get(ensureAuth, getFavourites);
+router.route("/get/:gid").get(getFavourites);
 
 module.exports = router;

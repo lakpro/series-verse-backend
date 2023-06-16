@@ -21,7 +21,8 @@ exports.setFavourites = async (req, res, next) => {
       let exist = 0;
       FavouritesList.forEach(function (u) {
         if (!exist && u.id === req.params["id"]) {
-          res.send("Favourite already exists");
+          // res.send("Favourite already exists");
+          res.status(208);
           exist = 1;
         }
       });
@@ -29,7 +30,8 @@ exports.setFavourites = async (req, res, next) => {
         user.FavouritesList.push({ id: req.params["id"], data: series.data });
         await user.save();
         console.log(user);
-        res.send("Favourite added");
+        // res.send("Favourite added");
+        res.status(201);
       }
     } catch (err) {
       res.status(500).json({ file: "fav user controller", error: err.message });

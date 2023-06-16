@@ -5,6 +5,7 @@ const seriesRouter = require("./routes/seriesRouter");
 const idRouter = require("./routes/idRouter");
 const searchRouter = require("./routes/searchRouter");
 const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
 const indexRouter = require("./routes/indexRouter");
 const favouritesRouter = require("./routes/favouritesRouter");
 const PORT = process.env.PORT || 3001;
@@ -12,6 +13,7 @@ const app = express();
 const passport = require("passport");
 const session = require("express-session");
 const db = require("./database/mongo");
+const CircularJSON = require("circular-json");
 
 // Load config
 require("dotenv").config();
@@ -46,7 +48,12 @@ app.use("/api/series", seriesRouter);
 app.use("/api/id", idRouter);
 app.use("/api/search", searchRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 app.use("/api/favourite", favouritesRouter);
+
+// app.get("/user", (req, res) => {
+//   res.send(req.user);
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

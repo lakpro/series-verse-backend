@@ -1,10 +1,11 @@
 /
-/dashboard -> If user is logged in, it will have user details else will redirect to /
+/dashboard -> If user is logged in, it will redirect to /profile
 api/auth/google
 api/auth/google/callback
 api/auth/logout
 api/auth/check  -> Tells if user is logged in or not (true/false)
 api/series
+api/user -> Gives the user details
 api/id/:id
 api/search/:query
 api/favourite/set/:gid/:id
