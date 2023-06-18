@@ -38,8 +38,15 @@ router.get("/logout", (req, res) => {
   //   }
   // });
   req.app.set("user", null);
-  req.session.destroy();
-  res.redirect("http://localhost:3000/home");
+  req.logout(function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      req.session.destroy(() => res.redirect("http://localhost:3000/home"));
+    }
+  });
+
+  // req.session.destroy();
 });
 
 router.get("/check", (req, res) => {
