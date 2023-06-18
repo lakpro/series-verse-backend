@@ -42,7 +42,7 @@ router.get("/logout", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      req.session.destroy(() => res.redirect("http://localhost:3000/home"));
+      req.session.destroy(() => res.redirect("https://series-verse-lakpro.netlify.app/home"));
     }
   });
 
