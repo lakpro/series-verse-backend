@@ -13,13 +13,20 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const passport = require("passport");
 const session = require("express-session");
-var MongoStore = require("connect-mongo");
-var MongoDBStore = require("connect-mongodb-session")(session);
+var httpContext = require("express-http-context");
+// var MongoStore = require("connect-mongo");
+// var MongoDBStore = require("connect-mongodb-session")(session);
 
 const db = require("./database/mongo");
 const CircularJSON = require("circular-json");
 
+//new loc
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(cookieParser());
+app.use(httpContext.middleware);
 
 // Load config
 require("dotenv").config();
@@ -28,14 +35,14 @@ require("dotenv").config();
 require("./controllers/passportMiddleware")(passport);
 
 //new
-var store = new MongoDBStore({
-  mongooseConnection: db,
-  collection: "mySessions",
-});
-// Catch errors
-store.on("error", function (error) {
-  console.log(error);
-});
+// var store = new MongoDBStore({
+//   mongooseConnection: db,
+//   collection: "mySessions",
+// });
+// // Catch errors
+// store.on("error", function (error) {
+//   console.log(error);
+// });
 
 // Session Middleware
 app.use(
@@ -50,8 +57,8 @@ app.use(
 
     // },
     // cookie: {
-    //   secure: false,
-    //   // maxAge: 1000 * 10, // 60 seconds
+    //   secure: true,
+    //   maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
     // },
   })
 );
@@ -60,9 +67,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// app.use(cors());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 
 //routes
 app.use("/", indexRouter);
